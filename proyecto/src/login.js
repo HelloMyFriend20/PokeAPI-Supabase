@@ -14,21 +14,22 @@ document.querySelector("#app").innerHTML = `
 <button id="btn-registro">Regístrese</button>
 </div>
 `;
-document.querySelector("#login-form").addEventListener("submit",
-handleLogin);
-document.querySelector("#btn-registro").addEventListener("click",
-mostrarRegistro);
+document.querySelector("#login-form").addEventListener("submit", handleLogin);
+document.querySelector("#btn-registro").addEventListener("click", mostrarRegistro);
 }
+
 async function handleLogin(event) {
 event.preventDefault();
 const email = document.querySelector("#email").value;
 const password = document.querySelector("#password").value;
-const { data, error } = await supabase.auth.signInWithPassword({ email,
-password });
+
+const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
 if (error) {
 alert("Error al iniciar sesión: " + error.message);
 return;
 }
 console.log("Login exitoso", data.user);
+
 location.reload();
 }

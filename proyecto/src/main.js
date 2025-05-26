@@ -1,22 +1,26 @@
-//adicion main.js
-import { supabase } from "./supabase.js";
 import { mostrarLogin } from "./login.js";
+import { supabase } from "./supabase.js";
 import { mostrarDatos } from "./usuario.js";
+
+
 
 document.addEventListener('DOMContentLoaded', async () => {
 const user = await validarSesion();
 if (!user) {
 document.querySelector(".c-nav").innerHTML = ""
 document.querySelector("#app").innerHTML = "no login"
-mostrarLogin(); //console.log("no login")
+mostrarLogin();
 } else {
 console.log('Usuario logueado:', user.email);
 General(); // Aquí pones tu lógica para cargar contenido
 document.querySelector(".c-nav").innerHTML = `
 <button class="c-nav-item" onclick="General()">Home</button>
 <button class="c-nav-item" onclick="mostrarAlbum()">Album</button>
-<button class="c-nav-item" onclick="mostrarAleatorio()">Aleatorio</button>
-<button class="c-nav-item" onclick="mostrarFavoritos()">Favoritos</button>
+<button class="c-nav-item"
+onclick="mostrarAleatorio()">Aleatorio</button>
+
+<button class="c-nav-item"
+onclick="mostrarFavoritos()">Favoritos</button>
 <button class="c-nav-item" onclick="mostrarDatos()">Usuario</button>
 `
 }
@@ -27,7 +31,6 @@ const { data: { session } } = await supabase.auth.getSession();
 return session?.user || null;
 }
 
-//main.js
 let pokemones = [];
 let totalPokes = 1026;
 
@@ -93,10 +96,14 @@ name = poke.name;
 
 const esFavorito = favoritos.some(p => Number(p.id) === Number(id));
 return `
-<div class="c-lista-pokemon poke-${id} "onclick="mostrarDetalle('${id}')">
-    <p>#${id}</p>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" width="auto" height="60" loading="lazy"alt="${name}">
-    <p>${name}</p>
+<div class="c-lista-pokemon poke-${id}"
+onclick="mostrarDetalle('${id}')">
+<p>#${id}</p>
+<img
+src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon
+/other/official-artwork/${id}.png" width="auto" height="60" loading="lazy"
+alt="${name}">
+<p>${name}</p>
 </div>`;
 }).join("");
 }
@@ -248,8 +255,7 @@ app.innerHTML = "";
 
 const contenedor = document.createElement("section");
 contenedor.classList.add("c-lista");
-contenedor.innerHTML = generarLista(nuevosAleatorios); // Usamos la función
-reutilizable
+contenedor.innerHTML = generarLista(nuevosAleatorios); // Usamos la función reutilizable
 app.appendChild(contenedor);
 }
 
