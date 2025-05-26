@@ -1,4 +1,5 @@
 import { supabase } from "./supabase.js"; // Asegúrate de tener este archivo configurado con createClient
+import { mostrarRegistro } from "./registro.js"; // Asegúrate de tener este archivo configurado para el registro
 
 export function mostrarLogin() {
 document.querySelector("#app").innerHTML = `
@@ -6,8 +7,7 @@ document.querySelector("#app").innerHTML = `
 <h2>Login</h2>
 <form id="login-form">
 <input type="email" id="email" placeholder="Email" required />
-<input type="password" id="password" placeholder="Contraseña" required
-/>
+<input type="password" id="password" placeholder="Contraseña" required/>
 <button type="submit">Iniciar sesión</button>
 </form>
 <h2>No tiene cuenta</h2>

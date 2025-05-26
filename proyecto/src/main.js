@@ -1,6 +1,7 @@
 //adicion main.js
 import { supabase } from "./supabase.js";
 import { mostrarLogin } from "./login.js";
+import { mostrarDatos } from "./usuario.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
 const user = await validarSesion();
@@ -14,14 +15,13 @@ General(); // Aquí pones tu lógica para cargar contenido
 document.querySelector(".c-nav").innerHTML = `
 <button class="c-nav-item" onclick="General()">Home</button>
 <button class="c-nav-item" onclick="mostrarAlbum()">Album</button>
-<button class="c-nav-item"
-onclick="mostrarAleatorio()">Aleatorio</button>
-<button class="c-nav-item"
-onclick="mostrarFavoritos()">Favoritos</button>
+<button class="c-nav-item" onclick="mostrarAleatorio()">Aleatorio</button>
+<button class="c-nav-item" onclick="mostrarFavoritos()">Favoritos</button>
 <button class="c-nav-item" onclick="mostrarDatos()">Usuario</button>
 `
 }
 });
+
 async function validarSesion() {
 const { data: { session } } = await supabase.auth.getSession();
 return session?.user || null;
@@ -93,14 +93,10 @@ name = poke.name;
 
 const esFavorito = favoritos.some(p => Number(p.id) === Number(id));
 return `
-<div class="c-lista-pokemon poke-${id}"
-onclick="mostrarDetalle('${id}')">
-<p>#${id}</p>
-<img
-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon
-/other/official-artwork/${id}.png" width="auto" height="60" loading="lazy"
-alt="${name}">
-<p>${name}</p>
+<div class="c-lista-pokemon poke-${id} "onclick="mostrarDetalle('${id}')">
+    <p>#${id}</p>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" width="auto" height="60" loading="lazy"alt="${name}">
+    <p>${name}</p>
 </div>`;
 }).join("");
 }
@@ -300,3 +296,4 @@ window.actualizarIconoFavorito = actualizarIconoFavorito;
 window.mostrarFavoritos = mostrarFavoritos;
 window.mostrarAleatorio = mostrarAleatorio;
 window.mostrarAlbum = mostrarAlbum;
+window.mostrarDatos = mostrarDatos;
